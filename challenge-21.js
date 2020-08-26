@@ -17,6 +17,28 @@ dado ao elemento HTML deve definir o que o elemento é ou o que ele faz.
 (function (win, doc) {
     'use strict';
 
+    let $timer = doc.querySelector('[data-js="timer"]')
+    let $start = doc.querySelector('[data-js="start"]')
+    let $stop = doc.querySelector('[data-js="stop"]')
+    let $reset = doc.querySelector('[data-js="reset"]')
+    let interval;
 
+    $start.addEventListener('click', startTimer, false);
+    $stop.addEventListener('click', stopTimer, false);
+    $reset.addEventListener('click', resetTimer, false);
+
+    function startTimer() {
+        $timer.value = +$timer.value + 1;
+        interval = setTimeout(startTimer, 1000)
+    }
+
+    function stopTimer() {
+        clearTimeout(interval);
+    }
+
+    function resetTimer() {
+        $timer.value = 0;
+        stopTimer();
+    }
 
 })(window, document);
