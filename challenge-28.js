@@ -45,6 +45,7 @@ function getAddressByCEP() {
 
   fetch(URL)
     .then(function (response) {
+      getMessage('loading')
       return response.json();
     })
 
@@ -55,13 +56,13 @@ function getAddressByCEP() {
 
 function fillTextHtml(data) {
   if (isDataOk(data)) {
-    aviso.innerText = `Informações para o CEP ${input.value}`
+    getMessage('ok')
     endereco.innerText = data.address;
     bairro.innerText = data.district;
     cidade.innerText = data.city;
     estado.innerText = data.state
   } else {
-    aviso.innerText = `Não foram encontradas informaçoes para o CEP ${input.value}`
+    getMessage('error')
     endereco.innerText = '-';
     bairro.innerText = '-';
     cidade.innerText = '-';
@@ -72,3 +73,12 @@ function fillTextHtml(data) {
 function isDataOk(data) {
   return data.ok === true;
 }
+
+function getMessage(type) {
+  const messages = {
+    loading: 'Buscando informações para o CEP selecionado',
+    ok: 'Informações para o CEP selecionado',
+    error: 'Não foram encontradas informações para o CEP selecionado'
+  };
+  aviso.textContent = messages[type];
+};
