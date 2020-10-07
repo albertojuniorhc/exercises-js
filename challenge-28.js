@@ -80,5 +80,5 @@ function getMessage(type) {
     ok: 'Informações para o CEP selecionado',
     error: 'Não foram encontradas informações para o CEP selecionado'
   };
-  aviso.textContent = messages[type];
+  return aviso.textContent = messages[type];
 };
